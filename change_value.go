@@ -123,6 +123,10 @@ func (c *ChangeValue) Set(value reflect.Value, convertCompatibleTypes bool) {
 			}
 			c.target.Set(value.Convert(c.target.Type()))
 		} else {
+			if !value.IsValid() && (c.target.Kind() == reflect.Ptr || c.target.Kind() == reflect.Interface) {
+				c.target.Set(reflect.Zero(c.target.Type()))
+				return
+			}
 			c.target.Set(value)
 		}
 		c.SetFlag(FlagApplied)

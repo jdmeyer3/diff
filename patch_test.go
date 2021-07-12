@@ -124,6 +124,13 @@ func TestPatch(t *testing.T) {
 			nil,
 		},
 		{
+			"struct-string-slice-pointer-nil-update", &tstruct{ValuesPointer: saptr([]string{"foo"})}, &tstruct{ValuesPointer: nil},
+			Changelog{
+				Change{Type: UPDATE, Path: []string{"values_pointer"}, From:  sptr("test"), To: nil},
+			},
+			nil,
+		},		
+		{
 			"struct-generic-slice-insert", &tstruct{Values: []string{"one"}}, &tstruct{Values: []string{"one", "two"}},
 			Changelog{
 				Change{Type: CREATE, Path: []string{"values", "1"}, From: nil, To: "two"},

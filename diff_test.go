@@ -73,6 +73,7 @@ type tstruct struct {
 	Map             map[string]string `diff:"map"`
 	Time            time.Time         `diff:"time"`
 	Pointer         *string           `diff:"pointer"`
+	ValuesPointer   *[]string         `diff:"values_pointer"`
 	Ignored         bool              `diff:"-"`
 	Identifiables   []tistruct        `diff:"identifiables"`
 	Unidentifiables []tuistruct       `diff:"unidentifiables"`
@@ -81,6 +82,10 @@ type tstruct struct {
 }
 
 func sptr(s string) *string {
+	return &s
+}
+
+func saptr(s []string) *[]string {
 	return &s
 }
 
